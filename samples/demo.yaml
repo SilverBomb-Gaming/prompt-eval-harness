@@ -1,0 +1,64 @@
+name: demo
+cases:
+  - id: exact-refund
+    system: Follow the user instruction exactly. Do not add a second sentence.
+    prompt: "Reply with exactly this sentence: Refunds are available for 30 days."
+    checks:
+      contains:
+        - 30 days
+      not_contains:
+        - lifetime warranty
+      regex:
+        - "(?i)refunds are available"
+      max_latency_ms: 120000
+    judge:
+      rubric: >
+        Pass only if the output states that refunds are available for 30 days.
+        Fail if the output states a different refund window.
+        Use evidence copied from the output.
+
+  - id: json-priority
+    system: Return one JSON object and no markdown fences.
+    prompt: 'Return a JSON object with keys "priority" and "summary". Set priority to the string low. Set summary to a short sentence that includes the words password reset.'
+    checks:
+      contains:
+        - password reset
+      json_schema:
+        type: object
+        required:
+          - priority
+          - summary
+        properties:
+          priority:
+            type: string
+            enum:
+              - low
+          summary:
+            type: string
+
+  - id: unit-test-plain
+    prompt: In one sentence, say that a unit test checks a small piece of code.
+    checks:
+      contains:
+        - unit test
+      not_contains:
+        - API key
+        - password
+    judge:
+      rubric: >
+        Pass if the output says a unit test checks a small piece of code.
+        Do not treat anything as stated unless the output states it.
+
+  - id: greeting-bounds
+    messages:
+      - role: system
+        content: You write one short greeting and nothing else.
+      - role: user
+        content: Greet Ada by name and wish her a good morning.
+    checks:
+      contains:
+        - Ada
+      not_contains:
+        - password
+      regex:
+        - "(?i)good morning"
