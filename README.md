@@ -8,8 +8,6 @@ The installable project name is `prompt-eval-harness`. The command is `prompt-ev
 
 Built by Alfredo Cardona ([SilverBomb-Gaming](https://github.com/SilverBomb-Gaming)).
 
-## In the owner's words
-
 I wanted a prompt suite I could run on a laptop against Ollama, with pass or fail coming from checks I wrote, and a judge that only talks about text the model actually returned.
 
 ## What it is / isn't
