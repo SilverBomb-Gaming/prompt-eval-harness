@@ -20,7 +20,7 @@ I wanted a prompt suite I could run on a laptop against Ollama, with pass or fai
 
 ## Demo
 
-You will need Python 3.11+. Ollama is only required for the last command. The dry run does not call a model.
+To properly demo this, You will need Python 3.11+. Ollama is only required for the last command. The dry run does not call a model.
 
 ```bash
 python3 -m venv .venv
